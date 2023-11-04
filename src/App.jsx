@@ -1,18 +1,31 @@
+import React from "react";
 import { createRoot } from "react-dom/client";
-import Pet from "./Pet";
-
+import Pizza from "./Pizza";
 
 const App = () => {
   return (
     <div>
+      <Header />
       <h1>Adopt Me!</h1>
-      <Pet name="Luna" animal="dog" breed="Havanese" />
-      <Pet name="Pepper" animal="bird" breed="Cockatiel" />
-      <Pet name="Doink" animal="cat" breed="Mix" />
+      <Pizza name="Luna" />
+
+      <Footer />
     </div>
   );
 };
 
+const Footer = () => {
+  return <div>footer</div>;
+};
+
+const Header = () => {
+  return <div>header</div>;
+};
+
 const container = document.getElementById("root");
 const root = createRoot(container);
-root.render(<App />);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
