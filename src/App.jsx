@@ -15,24 +15,61 @@ const App = () => {
 }
 
 const Menu = () => {
+    const pizzas = pizzaData
+    // const pizzas = []
+    const num_pizzas = pizzas.length
+
     return (
         <main className="menu">
             <h2>Our menu</h2>
-            <ul className="pizzas">
-                {pizzaData.map((pizza) => (
-                    <Pizza pizzaObj={pizza} key={pizza.name} />
-                ))}
-            </ul>
+            {num_pizzas > 0 ? (
+                <>
+                    <p>
+                        Authentic italian cuisine. 6 creative dishes to choose
+                        from. All from our stone oven, all organic, all
+                        delicious.
+                    </p>
+                    <ul className="pizzas">
+                        {pizzaData.map((pizza) => (
+                            <Pizza pizzaObj={pizza} key={pizza.name} />
+                        ))}
+                    </ul>
+                </>
+            ) : (
+                <p>
+                    We're still working on the menu. Please come back later :)
+                </p>
+            )}
         </main>
     )
 }
 
 const Footer = () => {
-    return (
-        <footer className="footer">
-            {new Date().toLocaleTimeString()}. We're currently open
-        </footer>
-    )
+    const hour = new Date().getHours()
+    const openHour = 12
+    const closeHour = 22
+    const isOpen = hour >= openHour && hour <= closeHour
+    console.log(isOpen)
+
+    if (isOpen)
+        return (
+            <footer className="footer">
+                <div className="order">
+                    <p>
+                        We're open until {closeHour}:00. Come to visit us or
+                        order online.
+                    </p>
+                    <button className="btn">order</button>
+                </div>
+            </footer>
+        )
+    else
+        return (
+            <p>
+                We're happy to welcome you between {openHour}:00 and {closeHour}
+                :00.
+            </p>
+        )
 }
 
 const Header = () => {
