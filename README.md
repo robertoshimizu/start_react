@@ -272,7 +272,25 @@ To be checked how to leave the public folder out of `src` folder and access the 
 3. Multiple Returns
 
 ```javascript
-
+if (isOpen)
+    return (
+        <footer className="footer">
+            <div className="order">
+                <p>
+                    We're open until {closeHour}:00. Come to visit us or order
+                    online.
+                </p>
+                <button className="btn">order</button>
+            </div>
+        </footer>
+    )
+else
+    return (
+        <p>
+            We're happy to welcome you between {openHour}:00 and {closeHour}
+            :00.
+        </p>
+    )
 ```
 
 #### Fragments
