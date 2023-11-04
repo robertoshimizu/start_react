@@ -1,12 +1,14 @@
 const Pizza = (props) => {
-  return (
-    <div>
-      <h1>{props.name}</h1>
-      <p>{props.photoName}</p>
-      <h2>{props.ingredients}</h2>
-      <h2>{props.price}</h2>
-    </div>
-  );
-};
+    return (
+        <li className="pizza">
+            <img src={props.pizzaObj.photoName} alt={props.name} />
+            <div>
+                <h3>{props.pizzaObj.name}</h3>
+                <p>{props.pizzaObj.ingredients}</p>
+                <span>{props.pizzaObj.price}</span>
+            </div>
+        </li>
+    )
+}
 
-export default Pizza;
+export default Pizza

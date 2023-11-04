@@ -204,3 +204,23 @@ Reference: https://react.dev/learn/thinking-in-react
 `<StrictMode>` lets you find common bugs in your components early during development.
 
 https://react.dev/reference/react/StrictMode
+
+
+### Images in React, using Vite
+
+The way Vite is configured in this project, the public folder needs to be inside the `src` folder.
+```javascript
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+  root: "src",
+});
+```
+The image needs to stay inside the public folder.
+```html
+<img src="images/pizza.jpg" alt="pizza" />
+```
+To be checked how to leave the public folder out of `src` folder and access the images.
+
