@@ -10,10 +10,6 @@ const SearchParams = () => {
   const [breed, setBreed] = useState('')
   const [breeds] = useBreedList(animal)
 
-  useEffect(() => {
-    requestPets()
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
   async function requestPets() {
     const res = await fetch(
       `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
@@ -22,6 +18,10 @@ const SearchParams = () => {
 
     setPets(json.pets)
   }
+
+  useEffect(() => {
+    requestPets()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="search-params">

@@ -165,6 +165,8 @@ const Welcome = (props) => {
 
 Functions starting with use are called Hooks. These special type of function lets you "hook into" React features from function components. `useState` is a built-in Hook provided by React. You can find other built-in Hooks in the API reference. You can also write your own Hooks by combining the existing ones.
 
+#### `useState`
+
 Hooks are more restrictive than other functions. You can only call Hooks at the top of your components (or other Hooks). If you want to use `useState` in a condition or a loop, extract a new component and put it there.
 
 ```javascript
@@ -200,6 +202,10 @@ export default SearchParams
 - `useState` returns to us an array with two things in it: the current value of that state and a function to update that state. We're using a feature of JavaScript called destructuring to get both of those things out of the array.
 - We use the `updateLocation` function in the `onChange` attribute of the input. Every time the input is typed into, it's going to call that function which calls `updateLocation` with what has been typed into the input. When `updateLocation` is called, React knows that its state has been modified and kicks off a re-render.
 - You can make your own custom hooks; `useState` is just one of many.
+
+#### `useEffect`
+
+We want the app to request an initial set of pets on initial load of the page. So let's make that happen using a special hook called `useEffect`. `useEffect` allows you to say do a render of this component first so the user can see something then as soon as the render is done, then do something (the something here being an effect). In our case, we want the user to see our UI first then we want to make a request to the API so we can initialize a list of pets.
 
 Reference: https://react.dev/learn/thinking-in-react
 
