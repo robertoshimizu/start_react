@@ -334,3 +334,8 @@ return (
     </div>
 </li>
 ```
+
+## Adding emojis
+
+-   windows: win key + `.` (period)
+-   mac: Ctrl + Command + spacebar
