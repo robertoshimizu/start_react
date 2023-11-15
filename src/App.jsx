@@ -20,10 +20,22 @@ const Logo = () => <h1>🌴Far Away 💼</h1>
 
 const Form = () => {
     const [description, setDescription] = useState('')
-    const [quantity, setQuantity] = useState(14)
+    const [quantity, setQuantity] = useState(1)
 
     function handleSubmit(event) {
         event.preventDefault()
+        if (!description) return
+
+        const newItem = {
+            description,
+            quantity,
+            isPacked: false,
+            id: Date.now(),
+        }
+        console.log(newItem)
+
+        setDescription('')
+        setQuantity(1)
     }
     return (
         <form className="add-form" onSubmit={handleSubmit}>
