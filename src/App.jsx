@@ -1,12 +1,12 @@
 import { createRoot } from 'react-dom/client'
 // delete Pet import, and add SearchParams
-import SearchParams from './SearchParams'
+import Fixie from './Fixie'
 
 const App = () => {
   return (
     <div>
       {/* in App.jsx, replace all the Pets */}
-      <SearchParams />;
+      <Fixie />;
     </div>
   )
 }
