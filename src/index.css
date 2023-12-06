@@ -185,3 +185,26 @@ SPACING SYSTEM (px)
 FONT SIZE SYSTEM (px)
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 /52 / 62 / 74 / 86 / 98
 */
+
+/* Media query for narrow screens (e.g., mobile devices) */
+@media (max-width: 600px) { /* Adjust 600px as needed for your design */
+  .pizzas {
+    grid-template-columns: 1fr; /* This will make it a single column layout */
+  }
+  .menu h2 {
+    font-size: 1.8rem;
+  }
+  .header h1 {    
+    font-size: 3.2rem;
+  }
+  .pizza h3 {
+    font-size: 1.8rem;  
+  }  
+  .pizza p {
+    font-size: 1.3rem;
+  }
+
+  .pizza span {
+    font-size: 1.3rem;
+  }
+}
