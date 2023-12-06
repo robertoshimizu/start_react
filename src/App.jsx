@@ -1,99 +1,172 @@
-import { useState } from 'react'
-
-const initialItems = [
-    { id: 1, description: 'Passports', quantity: 2, packed: false },
-]
-
-const App = () => {
-    const [items, setItems] = useState(initialItems)
+const pizzaData = [
+    {
+      name: "Focaccia",
+      ingredients: "Bread with italian olive oil and rosemary",
+      price: 6,
+      photoName: "pizzas/focaccia.jpg",
+      soldOut: false,
+    },
+    {
+      name: "Pizza Margherita",
+      ingredients: "Tomato and mozarella",
+      price: 10,
+      photoName: "pizzas/margherita.jpg",
+      soldOut: false,
+    },
+    {
+      name: "Pizza Spinaci",
+      ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
+      price: 12,
+      photoName: "pizzas/spinaci.jpg",
+      soldOut: false,
+    },
+    {
+      name: "Pizza Funghi",
+      ingredients: "Tomato, mozarella, mushrooms, and onion",
+      price: 12,
+      photoName: "pizzas/funghi.jpg",
+      soldOut: false,
+    },
+    {
+      name: "Pizza Salamino",
+      ingredients: "Tomato, mozarella, and pepperoni",
+      price: 15,
+      photoName: "pizzas/salamino.jpg",
+      soldOut: true,
+    },
+    {
+      name: "Pizza Prosciutto",
+      ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
+      price: 18,
+      photoName: "pizzas/prosciutto.jpg",
+      soldOut: false,
+    },
+  ];
+  
+  function App() {
     return (
-        <div>
-            <Logo />
-            <Form items={items} setItems={setItems} />
-            <PackingList items={items} />
-            <Stats />
-        </div>
-    )
-}
-
-const Logo = () => <h1>🌴Far Away 💼</h1>
-
-const Form = ({ items, setItems }) => {
-    const [description, setDescription] = useState('')
-    const [quantity, setQuantity] = useState(1)
-
-    function handleSubmit(event) {
-        event.preventDefault()
-        if (!description) return
-
-        const newItem = {
-            id: items.length + 1,
-            description,
-            quantity: quantity,
-            packed: false,
-        }
-        console.log([...items, newItem])
-
-        // update the state
-        setItems([...items, newItem])
-
-        setDescription('')
-        setQuantity(1)
-    }
+      <div className="container">
+        <Header />
+        <Menu />
+        <Footer />
+      </div>
+    );
+  }
+  
+  function Header() {
+    // const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
+    const style = {};
+  
     return (
-        <form className="add-form" onSubmit={handleSubmit}>
-            <h3>What do you need for your 😍 trip?</h3>
-            <select
-                name=""
-                id=""
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-            >
-                {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
-                    <option value={num} key={num}>
-                        {num}
-                    </option>
-                ))}
-            </select>
-
-            <input
-                type="text"
-                placeholder="Item..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-            />
-            <button>Add</button>
-        </form>
-    )
-}
-
-const PackingList = ({ items }) => {
+      <header className="header">
+        <h1 style={style}>Fast React Pizza Co.</h1>
+      </header>
+    );
+  }
+  
+  function Menu() {
+    const pizzas = pizzaData;
+    // const pizzas = [];
+    const numPizzas = pizzas.length;
+  
     return (
-        <div className="list">
-            <ul>
-                {items.map((item) => (
-                    <Item item={item} key={item.id} />
-                ))}
+      <main className="menu">
+        <h2>Our menu</h2>
+  
+        {numPizzas > 0 ? (
+          <>
+            <p>
+              Authentic Italian cuisine. 6 creative dishes to choose from. All
+              from our stone oven, all organic, all delicious.
+            </p>
+  
+            <ul className="pizzas">
+              {pizzas.map((pizza) => (
+                <Pizza pizzaObj={pizza} key={pizza.name} />
+              ))}
             </ul>
-        </div>
-    )
-}
-
-function Item({ item }) {
+          </>
+        ) : (
+          <p>We are still working on our menu. Please come back later :)</p>
+        )}
+  
+        {/* <Pizza
+          name="Pizza Spinaci"
+          ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+          photoName="pizzas/spinaci.jpg"
+          price={10}
+        />
+        <Pizza
+          name="Pizza Funghi"
+          ingredients="Tomato, mushrooms"
+          price={12}
+          photoName="pizzas/funghi.jpg"
+        /> */}
+      </main>
+    );
+  }
+  
+  function Pizza({ pizzaObj }) {
+    console.log(pizzaObj);
+  
+    // if (pizzaObj.soldOut) return null;
+  
     return (
-        <li>
-            <span style={item.packed ? { textDecoration: 'line-through' } : {}}>
-                {item.quantity} {item.description}
-            </span>
-            <button>❌</button>
-        </li>
-    )
-}
-
-const Stats = () => (
-    <footer className="stats">
-        <em>You have X items in your list, and you already packed X (X%)</em>
-    </footer>
-)
+      <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
+        <img src={pizzaObj.photoName} alt={pizzaObj.name} />
+        <div>
+          <h3>{pizzaObj.name}</h3>
+          <p>{pizzaObj.ingredients}</p>
+  
+          {/* {pizzaObj.soldOut ? (
+            <span>SOLD OUT</span>
+          ) : (
+            <span>{pizzaObj.price}</span>
+          )} */}
+  
+          <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
+        </div>
+      </li>
+    );
+  }
+  
+  function Footer() {
+    const hour = new Date().getHours();
+    const openHour = 12;
+    const closeHour = 22;
+    const isOpen = hour >= openHour && hour <= closeHour;
+    console.log(isOpen);
+  
+    // if (hour >= openHour && hour <= closeHour) alert("We're currently open!");
+    // else alert("Sorry we're closed");
+  
+    // if (!isOpen) return <p>CLOSED</p>;
+  
+    return (
+      <footer className="footer">
+        {isOpen ? (
+          <Order closeHour={closeHour} openHour={openHour} />
+        ) : (
+          <p>
+            We are happy to welcome you between {openHour}:00 and {closeHour}:00.
+          </p>
+        )}
+      </footer>
+    );
+  
+    // return React.createElement("footer", null, "We're currently open!");
+  }
+  
+  function Order({ closeHour, openHour }) {
+    return (
+      <div className="order">
+        <p>
+          We are open from {openHour}:00 to {closeHour}:00. Come visit us or order
+          online.
+        </p>
+        <button className="btn">Order</button>
+      </div>
+    );
+  }
 
 export default App
